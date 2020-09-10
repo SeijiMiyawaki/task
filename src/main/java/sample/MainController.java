@@ -5,35 +5,35 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 
 @Controller
 public class MainController {
     @Autowired
     PeopleRepository repository;
-    @RequestMapping("/")
-        private ModelAndView index(ModelAndView mav) {
-        mav.setViewName("index");
-        Iterable<People> list = repository.findAll();
-        mav.addObject("data", list);
-        return mav;
+    
+    @RequestMapping("/home")
+        private String index(Model model) {
+        Iterable<People> personlist = repository.findAll();
+        model.addAttribute("person", personlist);
+        return "home";
     }
+    
     @RequestMapping("/insert")
     @Transactional(readOnly=false)
-    private ModelAndView insert(@ModelAttribute("formInsert") People person, ModelAndView mav) {
-        repository.saveAndFlush(person);
-        return new ModelAndView("redirect:/");
+    private <insertForm> String insert(@ModelAttribute insertForm form) {
+        return "insert";
     }
+    
     @RequestMapping("/update")
     @Transactional(readOnly=false)
-    private ModelAndView update(@ModelAttribute("formUpdate") People person, ModelAndView mav) {
-        repository.saveAndFlush(person);
-        return new ModelAndView("redirect:/");
+    private <updateForm> String update(@ModelAttribute updateForm form) {
+        return "update";
     }
+    
     @RequestMapping("/delete")
     @Transactional(readOnly=false)
-        private ModelAndView delete(@ModelAttribute("formDelete") People person, ModelAndView mav) {
-        repository.delete(person);
-        return new ModelAndView("redirect:/");
+        private  <deleteForm> String delete(@ModelAttribute deleteForm form) {
+        return "delete";
     }
 }

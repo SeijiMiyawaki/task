@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div>
-			<form method="post" action="/insert" th:object="${formInsert}">
+			<form method="post" action="/insert" th:object="${insertForm}">
 				<p>新規作成</p>
 				<input type="text" name="name" size="50" placeholder="名前"></input>
 				<input type="text" name="age" size="50" placeholder="年齢"></input>
@@ -14,7 +14,7 @@
 			</form>
 		</div>
 		<div>
-			<form method="post" action="/update" th:object="${formUpdate}">
+			<form method="post" action="/update" th:object="${updateForm}">
 				<p>更新</p>
 				<input type="text" name="id" size="50" placeholder="ID"></input>
 				<input type="text" name="name" size="50" placeholder="名前"></input>
@@ -23,7 +23,7 @@
 			</form>
 		</div>
 		<div>
-			<form method="post" action="/delete" th:object="${formDelete}">
+			<form method="post" action="/delete" th:object="${deleteForm}">
 				<p>削除</p>
 				<input type="text" name="id" size="50" placeholder="ID"></input>
 				<input type="submit" value="削除"></input>
@@ -38,10 +38,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="data:${data}">
-					<td th:text="${data.id}"></td>
-					<td th:text="${data.name}"></td>
-					<td th:text="${data.age}"></td>
+				<tr th:each="people:${person}">
+					<td th:text="${person.id}"></td>
+					<td th:text="${person.name}"></td>
+					<td th:text="${person.age}"></td>
 				</tr>
 			</tbody>
 		</table>
