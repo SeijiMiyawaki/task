@@ -6,9 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sample.PeopleRepository;
-import sample.People;
-
 @Service
 public class PeopleService {
 	@Autowired
