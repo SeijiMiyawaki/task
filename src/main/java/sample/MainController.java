@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
-import sample.People;
-import sample.PeopleService;
-
 @Controller
 @RequestMapping("/home")
 public class MainController {
@@ -21,9 +18,9 @@ public class MainController {
     
     @GetMapping
     public String index(Model model) {
-        List<People> person = peopleService.findAll();
-        model.addAttribute("person", person);
-        return "person/index";
+        Iterable<People> peopleList = peopleService.findAll();
+        model.addAttribute("people", peopleList);
+        return "index";
     }
     
     
